@@ -14,6 +14,9 @@
 		D731DA611B3BFE6900B896E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D731DA601B3BFE6900B896E6 /* Images.xcassets */; };
 		D731DA641B3BFE6900B896E6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D731DA621B3BFE6900B896E6 /* LaunchScreen.xib */; };
 		D731DA701B3BFE6A00B896E6 /* XPhotoBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA6F1B3BFE6A00B896E6 /* XPhotoBrowserTests.m */; };
+		D731DA7F1B3C00A200B896E6 /* XPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA7E1B3C00A200B896E6 /* XPhotoBrowserViewController.m */; };
+		D731DA821B3C00CD00B896E6 /* XPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA811B3C00CD00B896E6 /* XPhoto.m */; };
+		D731DA851B3C01C000B896E6 /* XPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA841B3C01C000B896E6 /* XPhotoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		D731DA691B3BFE6A00B896E6 /* XPhotoBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XPhotoBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D731DA6E1B3BFE6A00B896E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D731DA6F1B3BFE6A00B896E6 /* XPhotoBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPhotoBrowserTests.m; sourceTree = "<group>"; };
+		D731DA7D1B3C00A200B896E6 /* XPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		D731DA7E1B3C00A200B896E6 /* XPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		D731DA801B3C00CD00B896E6 /* XPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPhoto.h; sourceTree = "<group>"; };
+		D731DA811B3C00CD00B896E6 /* XPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPhoto.m; sourceTree = "<group>"; };
+		D731DA831B3C01C000B896E6 /* XPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPhotoView.h; sourceTree = "<group>"; };
+		D731DA841B3C01C000B896E6 /* XPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPhotoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,7 @@
 		D731DA521B3BFE6900B896E6 /* XPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				D731DA7C1B3C00A200B896E6 /* XPhotoBrowser */,
 				D731DA571B3BFE6900B896E6 /* AppDelegate.h */,
 				D731DA581B3BFE6900B896E6 /* AppDelegate.m */,
 				D731DA5A1B3BFE6900B896E6 /* ViewController.h */,
@@ -117,6 +127,19 @@
 				D731DA6E1B3BFE6A00B896E6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D731DA7C1B3C00A200B896E6 /* XPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				D731DA7D1B3C00A200B896E6 /* XPhotoBrowserViewController.h */,
+				D731DA7E1B3C00A200B896E6 /* XPhotoBrowserViewController.m */,
+				D731DA801B3C00CD00B896E6 /* XPhoto.h */,
+				D731DA811B3C00CD00B896E6 /* XPhoto.m */,
+				D731DA831B3C01C000B896E6 /* XPhotoView.h */,
+				D731DA841B3C01C000B896E6 /* XPhotoView.m */,
+			);
+			path = XPhotoBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +242,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D731DA821B3C00CD00B896E6 /* XPhoto.m in Sources */,
 				D731DA5C1B3BFE6900B896E6 /* ViewController.m in Sources */,
+				D731DA851B3C01C000B896E6 /* XPhotoView.m in Sources */,
+				D731DA7F1B3C00A200B896E6 /* XPhotoBrowserViewController.m in Sources */,
 				D731DA591B3BFE6900B896E6 /* AppDelegate.m in Sources */,
 				D731DA561B3BFE6900B896E6 /* main.m in Sources */,
 			);
