@@ -34,6 +34,7 @@
         self.showsVerticalScrollIndicator = NO;
         self.decelerationRate = UIScrollViewDecelerationRateFast;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self setMaximumZoomScale:2.0];
         //
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         singleTap.delaysTouchesBegan = YES;
@@ -43,6 +44,9 @@
         UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
         doubleTap.numberOfTapsRequired = 2;
         [self addGestureRecognizer:doubleTap];
+        
+        [singleTap requireGestureRecognizerToFail:doubleTap];
+
     }
     return self;
 }
@@ -114,6 +118,15 @@
     return _imageView;
 }
 
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width) ? (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
+    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height) ? (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
+    _imageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
+}
+
+
+
 - (void)handleSingleTap:(UITapGestureRecognizer*)tap
 {
     [self performSelector:@selector(hide) withObject:nil afterDelay:0.2];
@@ -131,16 +144,16 @@
 
 - (void)hide
 {
-    [UIView animateWithDuration:0.25 animations:^{
-        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
+//    [UIView animateWithDuration:0.25 animations:^{
+//        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewSingleTap:)]) {
             [self.photoViewDelegate photoViewSingleTap:self];
         }
-    } completion:^(BOOL finished) {
-        if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
-            [self.photoViewDelegate photoViewDidEndZoom:self];
-        }
-    }];
+//    } completion:^(BOOL finished) {
+//        if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
+//            [self.photoViewDelegate photoViewDidEndZoom:self];
+//        }
+//    }];
 }
 
 
