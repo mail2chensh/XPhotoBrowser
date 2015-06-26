@@ -19,6 +19,9 @@
 		5BD1CBAF1B3C687C00DC86C7 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1CBA41B3C687C00DC86C7 /* 9.jpg */; };
 		5BD1CBB01B3C687C00DC86C7 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1CBA51B3C687C00DC86C7 /* 10.jpg */; };
 		5BD1CBB11B3C687C00DC86C7 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1CBA61B3C687C00DC86C7 /* 8.jpg */; };
+		D72893F41B3CF8B500CD1298 /* XPhotoBrowserBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D72893F31B3CF8B500CD1298 /* XPhotoBrowserBar.m */; };
+		D72893F61B3CFBBA00CD1298 /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = D72893F51B3CFBBA00CD1298 /* 返回.png */; };
+		D72893F81B3CFD1600CD1298 /* 查看大图删除键.png in Resources */ = {isa = PBXBuildFile; fileRef = D72893F71B3CFD1600CD1298 /* 查看大图删除键.png */; };
 		D731DA561B3BFE6900B896E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA551B3BFE6900B896E6 /* main.m */; };
 		D731DA591B3BFE6900B896E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA581B3BFE6900B896E6 /* AppDelegate.m */; };
 		D731DA5C1B3BFE6900B896E6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D731DA5B1B3BFE6900B896E6 /* ViewController.m */; };
@@ -54,6 +57,10 @@
 		5BD1CBA41B3C687C00DC86C7 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
 		5BD1CBA51B3C687C00DC86C7 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
 		5BD1CBA61B3C687C00DC86C7 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		D72893F21B3CF8B500CD1298 /* XPhotoBrowserBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPhotoBrowserBar.h; sourceTree = "<group>"; };
+		D72893F31B3CF8B500CD1298 /* XPhotoBrowserBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPhotoBrowserBar.m; sourceTree = "<group>"; };
+		D72893F51B3CFBBA00CD1298 /* 返回.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
+		D72893F71B3CFD1600CD1298 /* 查看大图删除键.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看大图删除键.png"; sourceTree = "<group>"; };
 		D731DA501B3BFE6900B896E6 /* XPhotoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XPhotoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D731DA541B3BFE6900B896E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D731DA551B3BFE6900B896E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +133,8 @@
 				5BD1CBA51B3C687C00DC86C7 /* 10.jpg */,
 				5BD1CBA61B3C687C00DC86C7 /* 8.jpg */,
 				5BD1CB9A1B3C61AF00DC86C7 /* delete.png */,
+				D72893F51B3CFBBA00CD1298 /* 返回.png */,
+				D72893F71B3CFD1600CD1298 /* 查看大图删除键.png */,
 				D731DA7C1B3C00A200B896E6 /* XPhotoBrowser */,
 				D731DA571B3BFE6900B896E6 /* AppDelegate.h */,
 				D731DA581B3BFE6900B896E6 /* AppDelegate.m */,
@@ -174,6 +183,8 @@
 				D731DA811B3C00CD00B896E6 /* XPhoto.m */,
 				D731DA831B3C01C000B896E6 /* XPhotoView.h */,
 				D731DA841B3C01C000B896E6 /* XPhotoView.m */,
+				D72893F21B3CF8B500CD1298 /* XPhotoBrowserBar.h */,
+				D72893F31B3CF8B500CD1298 /* XPhotoBrowserBar.m */,
 			);
 			path = XPhotoBrowser;
 			sourceTree = "<group>";
@@ -265,10 +276,12 @@
 				D731DA5F1B3BFE6900B896E6 /* Main.storyboard in Resources */,
 				5BD1CBA91B3C687C00DC86C7 /* 2.jpg in Resources */,
 				5BD1CBAC1B3C687C00DC86C7 /* 5.jpg in Resources */,
+				D72893F81B3CFD1600CD1298 /* 查看大图删除键.png in Resources */,
 				5BD1CBA71B3C687C00DC86C7 /* 0.jpg in Resources */,
 				5BD1CB9B1B3C61AF00DC86C7 /* delete.png in Resources */,
 				5BD1CBA81B3C687C00DC86C7 /* 1.jpg in Resources */,
 				5BD1CBAE1B3C687C00DC86C7 /* 7.jpg in Resources */,
+				D72893F61B3CFBBA00CD1298 /* 返回.png in Resources */,
 				5BD1CBB01B3C687C00DC86C7 /* 10.jpg in Resources */,
 				5BD1CBAF1B3C687C00DC86C7 /* 9.jpg in Resources */,
 				D731DA641B3BFE6900B896E6 /* LaunchScreen.xib in Resources */,
@@ -293,6 +306,7 @@
 				D731DA821B3C00CD00B896E6 /* XPhoto.m in Sources */,
 				D731DA5C1B3BFE6900B896E6 /* ViewController.m in Sources */,
 				D731DA851B3C01C000B896E6 /* XPhotoView.m in Sources */,
+				D72893F41B3CF8B500CD1298 /* XPhotoBrowserBar.m in Sources */,
 				D731DA7F1B3C00A200B896E6 /* XPhotoBrowserViewController.m in Sources */,
 				D731DA591B3BFE6900B896E6 /* AppDelegate.m in Sources */,
 				D731DA561B3BFE6900B896E6 /* main.m in Sources */,
@@ -425,7 +439,7 @@
 				INFOPLIST_FILE = XPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c13b8c6-7b14-45ff-b58e-eb8032fce54d";
+				PROVISIONING_PROFILE = "68b7bbff-075f-466a-b87b-0f939a9b7faa";
 			};
 			name = Debug;
 		};
@@ -437,7 +451,7 @@
 				INFOPLIST_FILE = XPhotoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c13b8c6-7b14-45ff-b58e-eb8032fce54d";
+				PROVISIONING_PROFILE = "68b7bbff-075f-466a-b87b-0f939a9b7faa";
 			};
 			name = Release;
 		};

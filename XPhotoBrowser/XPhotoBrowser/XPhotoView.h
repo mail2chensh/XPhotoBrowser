@@ -24,4 +24,6 @@
 
 @property (nonatomic, strong) XPhoto *photo;
 
+- (void)resetZoomScale;
+
 @end

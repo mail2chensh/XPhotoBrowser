@@ -125,11 +125,11 @@
     _imageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
 }
 
-
-
 - (void)handleSingleTap:(UITapGestureRecognizer*)tap
 {
-    [self performSelector:@selector(hide) withObject:nil afterDelay:0.2];
+    if ([self.photoViewDelegate respondsToSelector:@selector(photoViewSingleTap:)]) {
+        [self.photoViewDelegate photoViewSingleTap:self];
+    }
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer*)tap
@@ -142,20 +142,10 @@
     }
 }
 
-- (void)hide
+- (void)resetZoomScale
 {
-//    [UIView animateWithDuration:0.25 animations:^{
-//        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
-        if ([self.photoViewDelegate respondsToSelector:@selector(photoViewSingleTap:)]) {
-            [self.photoViewDelegate photoViewSingleTap:self];
-        }
-//    } completion:^(BOOL finished) {
-//        if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
-//            [self.photoViewDelegate photoViewDidEndZoom:self];
-//        }
-//    }];
+    [self setZoomScale:self.minimumZoomScale animated:YES];
 }
-
 
 
 @end

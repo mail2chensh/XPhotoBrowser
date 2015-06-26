@@ -9,16 +9,20 @@
 #import "XPhotoBrowserViewController.h"
 #import "XPhoto.h"
 #import "XPhotoView.h"
+#import "XPhotoBrowserBar.h"
 
 #define kPadding 10
 #define kPhotoViewTagOffset 1000
 #define kPhotoViewIndex(photoView) ([photoView tag] - kPhotoViewTagOffset)
+#define HEIGHT_OF_X_NAVIGATION_BAR (([[UIDevice currentDevice].systemVersion floatValue] > 7.0) ? 64.0f : 44.0f)
 
-@interface XPhotoBrowserViewController () <UIScrollViewDelegate, XPhotoViewDelegate>
+
+@interface XPhotoBrowserViewController () <UIScrollViewDelegate, XPhotoViewDelegate, XPhotoBrowserBarDelegate, UIActionSheetDelegate>
 {
     UIScrollView *_photoScrollView;
     NSMutableArray *_viewsArray;
     BOOL _hiddenNavBar;
+    XPhotoBrowserBar *_bar;
 }
 @end
 
@@ -32,13 +36,9 @@
     self.view.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor blackColor];
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(deletePhotoView:) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, 44, 44);
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = item;
-    
+    _bar = [[XPhotoBrowserBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEIGHT_OF_X_NAVIGATION_BAR)];
+    _bar.delegate = self;
+    [self.view addSubview:_bar];
 }
 
 - (void)viewDidLoad {
@@ -48,14 +48,14 @@
     
     [self createScrollView];
     [self createPhotoViews];
+    
+    [self.view bringSubviewToFront:_bar];
     [self updateNavigationTitleBar];
 }
 
 - (void)createScrollView
 {
     CGRect frame = self.view.bounds;
-//    frame.origin.x -= kPadding;
-//    frame.size.width += 2 * kPadding;
     
     _photoScrollView = [[UIScrollView alloc] initWithFrame:frame];
     _photoScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -92,7 +92,8 @@
 
 - (void)deletePhotoView:(id)sender
 {
-    [self deletePhotoViewWithIndex:_currentPhotoIndex];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"真的要删除这张照片吗?" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除 照片" otherButtonTitles: nil];
+    [actionSheet showInView:self.view];
 }
 
 - (void)deletePhotoViewWithIndex:(NSInteger)index
@@ -111,16 +112,16 @@
         [self.delegate photoBrowser:self didDeletePhotoAtIndex:index];
     }
     
+    [self updateNavigationTitleBar];
+    
     if (count == 0) {
-        [self back];
+        [self photoBrowserBarLeftButtonDidTouch];
         return;
     }
     if (_currentPhotoIndex == count) {
         _currentPhotoIndex --;
     }
-
 }
-
 
 - (void)reloadData
 {
@@ -132,54 +133,25 @@
 - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
 {
     _currentPhotoIndex = currentPhotoIndex;
-    
-}
-
-- (void)showPhotoView
-{
-//    NSUInteger count = [self.dataSource numberOfPhotoInPhotoBrowser:self];
-//    
-//    CGRect visibleBounds = _photoScrollView.bounds;
-//    int firstIndex = (int)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
-//    int lastIndex = (int)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
-//    if (firstIndex < 0) {
-//        firstIndex = 0;
-//    }
-//    if (firstIndex >= count) {
-//        firstIndex = (int)count - 1;
-//    }
-//    if (lastIndex < 0) {
-//        lastIndex = 0;
-//    }
-//    if (lastIndex >= count) {
-//        lastIndex = (int)count - 1;
-//    }
-//    for (NSUInteger index = firstIndex; index <= lastIndex; index++) {
-////        [_photoScrollView setContentOffset:CGPointMake(index * self.view.frame.size.width, 0)];
-//        [_photoScrollView scrollRectToVisible:CGRectMake(index * self.view.frame.size.width, 0, 0, 0) animated:YES];
-//    }
-}
-
-- (void)showPhotoViewAtIndex:(NSUInteger)index
-{
-    
 }
 
 - (void)updateNavigationTitleBar
 {
     NSUInteger count = [self.dataSource numberOfPhotoInPhotoBrowser:self];
     _currentPhotoIndex = _photoScrollView.contentOffset.x / _photoScrollView.frame.size.width;
-    [self.navigationItem setTitle:[NSString stringWithFormat:@"%d/%d", (int)_currentPhotoIndex + 1, (int)count]];
+    _bar.titleLabel.text = [NSString stringWithFormat:@"%d/%d", (int)_currentPhotoIndex + 1, (int)count];
 }
 
 
 #pragma mark - photoview delegate
 - (void)photoViewSingleTap:(XPhotoView *)photoView
 {
-//    [self.navigationController popViewControllerAnimated:YES];
-
     _hiddenNavBar = !_hiddenNavBar;
-    [self.navigationController setNavigationBarHidden:_hiddenNavBar animated:YES];
+    [UIView animateWithDuration:0.1f animations:^{
+        _bar.frame = CGRectMake(0, _hiddenNavBar ? -_bar.frame.size.height : 0, _bar.frame.size.width, _bar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
     [[UIApplication sharedApplication] setStatusBarHidden:_hiddenNavBar];
 }
 
@@ -191,18 +163,39 @@
 #pragma mark - scrollview delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self showPhotoView];
     [self updateNavigationTitleBar];
 }
 
-#pragma mark - 
-- (void)back
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    int count = (int)_viewsArray.count;
+    for (int i = 0 ; i < count ; i++) {
+        if (i != _currentPhotoIndex) {
+            XPhotoView *tempView = [_viewsArray objectAtIndex:i];
+            [tempView resetZoomScale];
+        }
+    }
 }
 
 
+#pragma mark - 
+- (void)photoBrowserBarLeftButtonDidTouch
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)photoBrowserBarRightButtonDidTouch
+{
+    [self deletePhotoView:nil];
+}
+
+#pragma mark - 
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self deletePhotoViewWithIndex:_currentPhotoIndex];
+    }
+}
 
 
 

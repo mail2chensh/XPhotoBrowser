@@ -43,7 +43,10 @@
     vc.delegate = self;
     vc.dataSource = self;
     vc.currentPhotoIndex = 0;
-    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 - (void)photoBrowser:(XPhotoBrowserViewController *)photoBrowser didDeletePhotoAtIndex:(NSUInteger)index
