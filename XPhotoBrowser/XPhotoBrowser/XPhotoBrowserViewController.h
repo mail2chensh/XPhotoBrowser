@@ -22,8 +22,6 @@
 
 @protocol XPhotoBrowserViewControllerDelegate <NSObject>
 
-- (void)photoBrowser:(XPhotoBrowserViewController*)photoBrowser didChangedToPageAtIndex:(NSUInteger)index;
-
 - (void)photoBrowser:(XPhotoBrowserViewController*)photoBrowser didDeletePhotoAtIndex:(NSUInteger)index;
 
 @end
