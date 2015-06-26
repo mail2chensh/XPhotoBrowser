@@ -27,4 +27,6 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
+@property (nonatomic, assign) BOOL hiddenDeleteButton;
+
 @end

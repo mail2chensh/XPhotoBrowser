@@ -43,6 +43,7 @@
     
     self.rightButton = [self createButton:CGRectMake(self.frame.size.width - 44 - 10, self.frame.size.height - 44 - 10, 44, 44) withNormalStateImage:[UIImage imageNamed:@"查看大图删除键.png"] withTarget:self withAction:@selector(rightButtonDidTouch:) isleft:NO];
     [self addSubview:self.rightButton];
+    
 }
 
 - (void)leftButtonDidTouch:(id)sender
@@ -71,6 +72,12 @@
     imageView.frame = CGRectMake(isleft ? 0 : (commonButton.frame.size.width - nImage.size.width / 2), commonButton.frame.size.height - nImage.size.height / 2, nImage.size.width / 2, nImage.size.height / 2);
     [commonButton addSubview:imageView];
     return commonButton;
+}
+
+- (void)setHiddenDeleteButton:(BOOL)hiddenDeleteButton
+{
+    _hiddenDeleteButton = hiddenDeleteButton;
+    self.rightButton.hidden = _hiddenDeleteButton;
 }
 
 @end

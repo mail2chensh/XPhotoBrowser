@@ -35,9 +35,7 @@
 
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
 
-
-
-
+@property (nonatomic, assign) BOOL hiddenDeleteButton;
 
 - (void)reloadData;
 

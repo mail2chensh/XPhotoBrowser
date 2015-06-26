@@ -38,6 +38,7 @@
     
     _bar = [[XPhotoBrowserBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEIGHT_OF_X_NAVIGATION_BAR)];
     _bar.delegate = self;
+    _bar.hiddenDeleteButton = self.hiddenDeleteButton;
     [self.view addSubview:_bar];
 }
 
